@@ -27,3 +27,7 @@ Update with support for dimmer WITHOUT a seperate relay to turn a (dimmeable) li
 # Version 1.0.5
 
 Bug fix
+
+# Version 1.0.6
+
+Bug fix
