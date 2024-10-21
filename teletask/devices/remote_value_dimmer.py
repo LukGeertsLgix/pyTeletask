@@ -2,16 +2,23 @@
 Module for managing a Scaling remote value (Dimmer control).
 DPT 5.001 (Dimmer percentage control).
 """
+from enum import Enum
+
 from .remote_value import RemoteValue
+from teletask.doip import TelegramSetting
 
 
-class RemoteValueScaling(RemoteValue):
+class RemoteValueDimmer(RemoteValue):
     """
     Class for managing the scaling remote value of a dimmer in the Teletask system.
     
     This class allows for controlling the dimming value (brightness) of a device,
     by converting between a percentage value and the Teletask system's internal format.
     """
+    class Value(Enum):
+        """Enum for indicating the direction."""
+        OFF = 0
+        ON = 255
 
     def __init__(self, 
                  teletask, 
@@ -22,7 +29,7 @@ class RemoteValueScaling(RemoteValue):
                  range_to=0, 
                  doip_component="DIMMER"):
         """
-        Initialize the RemoteValueScaling class for managing dimmer values.
+        Initialize the RemoteValueDimmer class for managing dimmer values.
 
         Args:
             teletask: The main Teletask system reference.
@@ -34,7 +41,7 @@ class RemoteValueScaling(RemoteValue):
             doip_component: The Teletask component type (default: "DIMMER").
         """
         # Call the parent class constructor (RemoteValue)
-        super(RemoteValueScaling, self).__init__(
+        super(RemoteValueDimmer, self).__init__(
             teletask, 
             group_address=group_address, 
             device_name=device_name, 
@@ -69,6 +76,14 @@ class RemoteValueScaling(RemoteValue):
         """
         # Return the received value directly as it represents a percentage.
         return value
+
+    async def off(self):
+        """Set value to down."""
+        await self.set(self.Value.OFF.value)
+
+    async def on(self):
+        """Set value to UP."""
+        await self.set(self.Value.ON.value)
 
     @property
     def unit_of_measurement(self):
