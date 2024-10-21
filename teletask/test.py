@@ -54,39 +54,43 @@ async def main(ip_address, port):
     await doip.start(ip_address, port)  # Connect using variables for IP and port
     
     # Light 1: A simple light without a dimmer, controlled via a relay
-    lightObject = Light(doip,
-                  name='SalonSpots',  # Name of the light
+    lightObject1 = Light(doip,
+                  name='OverloopBureau',  # Name of the light
                   group_address_switch=HomeRelays.OverloopBureau,  # Address used for switching the light
                   doip_component="relay")  # This light uses a relay to switch on/off
     
     # Turn the light on, wait for 2 seconds then turn it off and wait for 2 seconds
-    print(f"Turning {lightObject.name} ON")
-    await lightObject.set_on()  # Turn on
+    print(f"Getting current state from {lightObject1.name} ")
+    await lightObject1.current_state()  # Get current state
     await asyncio.sleep(2)
-    print(f"Turning {lightObject.name} OFF")
-    await lightObject.set_off()  # Turn off
+    print(f"Turning {lightObject1.name} ON")
+    await lightObject1.set_on()  # Turn on
+    await asyncio.sleep(2)
+    print(f"Getting current state from {lightObject1.name} ")
+    await lightObject1.current_state()  # Get current state
+    await asyncio.sleep(2)
+    print(f"Turning {lightObject1.name} OFF")
+    await lightObject1.set_off()  # Turn off
     await asyncio.sleep(2)
 
-    """
     # Light 2: A dimmable light with a separate relay to turn on/off and control brightness
-    light2 = Light(doip,
-                name='Stalamp2',  # Name of the light
-                group_address_switch='32',  # Address for switching on/off
+    lightObject2 = Light(doip,
+                name='OverloopWand',  # Name of the light
+                group_address_switch=HomeRelays.OverloopWand,  # Address for switching on/off
                 group_address_brightness='1',  # Address for controlling brightness
                 doip_component="relay")  # This light also uses a relay
     
     # Turn the light on, randomly set brightness, and turn it off
-    print("Turning light2 ON")
-    await light2.set_on()  # Turn light2 on
+    print(f"Turning {lightObject2.name} ON")
+    await lightObject2.set_on()  # Turn lightObject2 on
     await asyncio.sleep(1)
     brightness2 = int(random.uniform(0, 100))  # Random brightness value between 0 and 100%
-    print(f"Setting light2 brightness to {brightness2}%")
-    await light2.set_brightness(brightness2)  # Set brightness
+    print(f"Setting {lightObject2.name} brightness to {brightness2}%")
+    await lightObject2.set_brightness(brightness2)  # Set brightness
     await asyncio.sleep(1)
-    print("Turning light2 OFF")
-    await light2.set_off()  # Turn light2 off
+    print(f"Turning {lightObject2.name} OFF")
+    await lightObject2.set_off()  # Turn lightObject2 off
     await asyncio.sleep(1)
-    """
 
     """
     # Light 3: A dimmable light controlled using the Dimmer class (new in version 1.0.4),

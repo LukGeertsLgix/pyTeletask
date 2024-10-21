@@ -1,9 +1,17 @@
-2024-10-21 17:48:07,796 - teletask.log - INFO - Teletask instance created.
-2024-10-21 17:48:07,796 - teletask.log - DEBUG - Create an instance of the Client for managing connections
-2024-10-21 17:48:07,796 - teletask.log - DEBUG - CRegister a callback to handle responses received from the Client
-2024-10-21 17:48:07,796 - teletask.log - DEBUG - Trying to connect to 192.168.1.22:55957 
-2024-10-21 17:48:07,798 - teletask.log - INFO - Sending: s,8,7,1,1,0,14,103,136,
-2024-10-21 17:48:07,799 - teletask.log - INFO - Sending: s,3,11,16,
-2024-10-21 17:48:09,811 - teletask.log - INFO - Sending: s,8,7,1,1,0,14,103,136,
-2024-10-21 17:48:16,827 - teletask.log - DEBUG - Stopping TelegramQueue
-2024-10-21 17:48:16,827 - teletask.log - INFO - Closing transport None
+2024-10-21 18:15:30,176 - teletask.log - INFO - Teletask instance created.
+2024-10-21 18:15:30,176 - teletask.log - DEBUG - Create an instance of the Client for managing connections
+2024-10-21 18:15:30,176 - teletask.log - DEBUG - CRegister a callback to handle responses received from the Client
+2024-10-21 18:15:30,177 - teletask.log - DEBUG - Trying to connect to 192.168.1.22:55957 
+2024-10-21 18:15:30,180 - teletask.log - INFO - Sending: s,7,6,1,1,0,14,31,
+2024-10-21 18:15:30,180 - teletask.log - INFO - Sending: s,3,11,16,
+2024-10-21 18:15:30,189 - teletask.log - INFO - Received: <1 14 ['2', '9', '16', '1', '1', '0', '14', '0', '255', '42'] 255/>
+2024-10-21 18:15:32,187 - teletask.log - INFO - Sending: s,8,7,1,1,0,14,103,136,
+2024-10-21 18:15:34,204 - teletask.log - INFO - Sending: s,7,6,1,1,0,14,31,
+2024-10-21 18:15:34,208 - teletask.log - INFO - Received: <1 14 ['2', '9', '16', '1', '1', '0', '14', '0', '0', '43'] 0/>
+2024-10-21 18:15:36,223 - teletask.log - INFO - Sending: s,8,7,1,1,0,14,103,136,
+2024-10-21 18:15:38,225 - teletask.log - INFO - Sending: s,8,7,1,1,0,1,103,123,
+2024-10-21 18:15:39,233 - teletask.log - INFO - Sending: s,8,7,1,2,0,1,19,40,
+2024-10-21 18:15:40,178 - teletask.log - INFO - Sending: s,3,11,16,
+2024-10-21 18:15:40,256 - teletask.log - INFO - Sending: s,8,7,1,1,0,1,103,123,
+2024-10-21 18:15:46,265 - teletask.log - DEBUG - Stopping TelegramQueue
+2024-10-21 18:15:46,265 - teletask.log - INFO - Closing transport None

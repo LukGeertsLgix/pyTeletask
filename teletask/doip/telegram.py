@@ -28,31 +28,32 @@ class TeletaskConst(Enum):
 
 class TelegramCommand(Enum):
     """Enum class for Teletask command types."""
-    SET = 7
-    GET = 6
-    GROUPSET = 9
-    LOG = 3
-    EVENTREPORT = 0x10
-    WRITEDISPLAY = 4
-    KEEPALIVE = 11
+    SET = 7             # This command allows the CCT to set individual functions
+    GET = 6             # When the TDS receives this command it reports the state of the specified device.
+    GROUPSET = 9        # An extension of the Function Get. With this command it is possible to ask for the status of multiple devices of the same type at once
+    LOG = 3             # When the TDS receives this command it (de-)activates it’s channel for reporting the function! Remark: If you have multiple connections to the TDS, the TDS keeps a list of functions which need to be reported for each connection.
+    EVENTREPORT = 0x10  # TDS sends this command it the level of the specified load has changed (if the Function Log for this function on this connection has been set) , or as an answer to a Function Get (always)
+    WRITEDISPLAY = 4    # This Command can be used to create a "Dynamic Message"
+    KEEPALIVE = 11      # This command can be send to keep the socket open.
 
 
 class TelegramFunction(Enum):
     """Enum class representing Teletask functional units."""
-    RELAY = 1
-    DIMMER = 2
-    MOTOR = 6
-    LOCMOOD = 8
-    GENMOOD = 10
-    FLAG = 15
-    SENSOR = 20
-    AUDIO = 31
-    PROCESS = 3
-    REGIME = 14
-    TPKEY = 52
-    SERVICE = 53
-    MESSAGE = 54
-    CONDITION = 60
+    RELAY = 1       # control or get the status of a relay
+    DIMMER = 2      # control or get the status of a dimmer
+    MOTOR = 6       # control or get the status of a Motor
+    LOCMOOD = 8     # control or get the status of a Local Mood
+    TIMEDMOOD = 9   # control or get the status of a Timed Local Mood
+    GENMOOD = 10    # control or get the status of a General Mood
+    FLAG = 15       # control or get the status of a Flag
+    SENSOR = 20     # control or get the status of a Sensor zone
+    AUDIO = 31      # control or get the status of a Audio zone
+    PROCESS = 3     # control or get the status of a Process function
+    REGIME = 14     # control or get the status of a Regime function
+    TPKEY = 52      # simulate a key press on an interface
+    SERVICE = 53    # control or get the status of a Service function
+    MESSAGE = 54    # control or get the status of a Messages or Alarms
+    CONDITION = 60  # get the status of a Condition
 
 
 class TelegramSetting(Enum):

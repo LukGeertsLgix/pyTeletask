@@ -125,7 +125,8 @@ class Device:
         telegram.payload = payload  # Set the payload data.
         
         # Set the telegram type based on whether it's a response or a regular write command.
-        telegram.telegramtype = TelegramType.GROUP_RESPONSE if response else TelegramType.GROUP_WRITE
+        # The telegramtype is not a member of the Telegram class, so commented it out.
+        # telegram.telegramtype = TelegramType.GROUP_RESPONSE if response else TelegramType.GROUP_WRITE
         await self.teletask.telegrams.put(telegram)  # Send the telegram to the Teletask bus.
 
     def state_addresses(self):
