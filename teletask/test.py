@@ -1,6 +1,7 @@
 """Example for switching a light on and off."""
 import asyncio  # For handling asynchronous operations
 import random   # To generate random brightness levels
+import logging  # To configure logging
 from teletask import Teletask  # Import the Teletask protocol handler in client.py
 from teletask.devices import Light  # Import the Light class for controlling lights
 from teletask.devices import Dimmer  # Import the Dimmer class for controlling dimmable lights
@@ -37,7 +38,16 @@ class HomeRelays:
 
 async def main(ip_address, port):
     """Connect to KNX/IP bus, switch on light, wait 2 seconds and switch it off again."""
-        
+    
+    # Configure logging if it hasn't been configured yet
+    if not logging.getLogger().hasHandlers():
+        logging.basicConfig(
+            level=logging.DEBUG,  # Set minimum log level to DEBUG
+            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',  # Custom log format
+            filename='test.py.log',  # Log output to a file
+            filemode='w'  # Overwrite the log file on each run
+        )
+
     # Create a Teletask instance and connect to the Teletask system over IP
     print(f"Connecting to Teletask system at {ip_address}:{port}")
     doip = Teletask()
@@ -46,7 +56,7 @@ async def main(ip_address, port):
     # Light 1: A simple light without a dimmer, controlled via a relay
     lightObject = Light(doip,
                   name='SalonSpots',  # Name of the light
-                  group_address_switch=HomeRelays.SalonSpots,  # Address used for switching the light
+                  group_address_switch=HomeRelays.OverloopBureau,  # Address used for switching the light
                   doip_component="relay")  # This light uses a relay to switch on/off
     
     # Turn the light on, wait for 2 seconds then turn it off and wait for 2 seconds
