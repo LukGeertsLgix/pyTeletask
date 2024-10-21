@@ -1,6 +1,7 @@
 """
 Module for handling a vector/array of devices.
-More or less an array with devices. Adds some search functionality to find devices.
+This class acts as a container for multiple devices, 
+providing functionality to search and manage them.
 """
 from .device import Device
 
@@ -10,60 +11,60 @@ class Devices:
 
     def __init__(self):
         """Initialize Devices class."""
-        self.__devices = []
-        self.device_updated_cbs = []
+        self.__devices = []  # Internal list to hold device instances
+        self.device_updated_cbs = []  # List of callbacks for device updates
 
     def register_device_updated_cb(self, device_updated_cb):
-        """Register callback for devices beeing updated."""
+        """Register a callback for devices being updated."""
         self.device_updated_cbs.append(device_updated_cb)
 
     def unregister_device_updated_cb(self, device_updated_cb):
-        """Unregister callback for devices beeing updated."""
+        """Unregister a callback for devices being updated."""
         self.device_updated_cbs.remove(device_updated_cb)
 
     def __iter__(self):
-        """Iterator."""
+        """Iterator to allow iteration over devices."""
         yield from self.__devices
 
     def devices_by_group_address(self, group_address):
-        """Return device(s) by group address."""
+        """Return device(s) that match the specified group address."""
         for device in self.__devices:
             if device.has_group_address(group_address):
-                yield device
+                yield device  # Yielding devices that match the group address
 
     def __getitem__(self, key):
         """Return device by name or by index."""
         for device in self.__devices:
             if device.name == key:
-                return device
+                return device  # Return device matching the name
         if isinstance(key, int):
-            return self.__devices[key]
-        raise KeyError
+            return self.__devices[key]  # Return device by index
+        raise KeyError(f"Device not found: {key}")  # Raise KeyError if not found
 
     def __len__(self):
-        """Return number of devices within vector."""
+        """Return the number of devices within the vector."""
         return len(self.__devices)
 
     def __contains__(self, key):
-        """Return if devices with name 'key' is within devices."""
+        """Check if a device with the specified name exists."""
         for device in self.__devices:
             if device.name == key:
-                return True
-        return False
+                return True  # Return True if the device exists
+        return False  # Return False if not found
 
     def add(self, device):
-        """Add device to devices vector."""
+        """Add a device to the devices vector."""
         if not isinstance(device, Device):
-            raise TypeError()
-        device.register_device_updated_cb(self.device_updated)
-        self.__devices.append(device)
+            raise TypeError("Only instances of Device can be added.")
+        device.register_device_updated_cb(self.device_updated)  # Register update callback
+        self.__devices.append(device)  # Append device to internal list
 
     async def device_updated(self, device):
-        """Call all registered device updated callbacks of device."""
+        """Call all registered device updated callbacks for the specified device."""
         for device_updated_cb in self.device_updated_cbs:
-            await device_updated_cb(device)
+            await device_updated_cb(device)  # Await each callback
 
     async def sync(self):
-        """Read state of devices from Teletask bus."""
+        """Read the state of devices from the Teletask bus."""
         for device in self.__devices:
-            await device.sync()
+            await device.sync()  # Sync each device with the Teletask bus
