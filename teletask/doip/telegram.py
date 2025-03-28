@@ -30,7 +30,7 @@ class TelegramCommand(Enum):
     """Enum class for Teletask command types."""
     SET = 7             # This command allows the CCT to set individual functions
     GET = 6             # When the TDS receives this command it reports the state of the specified device.
-    GROUPSET = 9        # An extension of the Function Get. With this command it is possible to ask for the status of multiple devices of the same type at once
+    GROUPGET = 9        # An extension of the Function Get. With this command it is possible to ask for the status of multiple devices of the same type at once
     LOG = 3             # When the TDS receives this command it (de-)activates it’s channel for reporting the function! Remark: If you have multiple connections to the TDS, the TDS keeps a list of functions which need to be reported for each connection.
     EVENTREPORT = 0x10  # TDS sends this command it the level of the specified load has changed (if the Function Log for this function on this connection has been set) , or as an answer to a Function Get (always)
     WRITEDISPLAY = 4    # This Command can be used to create a "Dynamic Message"
