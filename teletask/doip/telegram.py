@@ -95,17 +95,17 @@ class Telegram:
         # Logic for different command types
         if str(command) == "TelegramCommand.LOG":
             # Handle 'LOG' command (minimal payload)
-            self.payload[0] = function.value
-            self.payload[1] = 1
+            self.payload[0] = function.value #Fnc
+            self.payload[1] = 1 # State
         elif str(command) == "TelegramCommand.GET":
             # Handle 'GET' command with additional parameters
-            self.payload[0] = 1  # Central address
+            self.payload[0] = TeletaskConst.CENTRAL # Central address = 1
             self.payload[1] = function.value
             self.payload[2] = 0
             self.payload[3] = address
         elif str(command) == "TelegramCommand.SET":
             # Handle 'SET' command
-            self.payload[0] = 1  # Central address
+            self.payload[0] = TeletaskConst.CENTRAL # Central address = 1 
             self.payload[1] = function.value if function else None
         else:
             # Raise an exception if the command is unrecognized
