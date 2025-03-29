@@ -2,39 +2,40 @@
 import asyncio  # For handling asynchronous operations
 import random   # To generate random brightness levels
 import logging  # To configure logging
+from enum import Enum
 from teletask import Teletask  # Import the Teletask protocol handler in client.py
 from teletask.devices import Light  # Import the Light class for controlling lights
 from teletask.devices import Dimmer  # Import the Dimmer class for controlling dimmable lights
 
-class HomeRelays:
-    """List of my relays."""
-    OverloopWand = '1'
-    OverloopBureau = '14'
-    MasterPlafond = '2'
-    MasterWand = '19'
-    EetkamerPlafond = '3'
-    KeukenOntbijt = '4'
-    KeukenAanrecht = '9'
-    VoordeurSpots = '5'
-    VoordeurWand = '8'
-    WC = '6'
-    SalonWand = '7'
-    SalonSpots = '10'
-    ZijdeurWand = '11'
-    ZijdeurPlafond = '20'
-    KelderPlafond = '12'
-    BadkamerDouche = '13'
-    BadkamerSpiegel = '24'
-    SlaapkamerRechtsWand = '15'
-    SlaapkamerRechtsPlafond = '17'
-    SlaapkamerLinksPlafond = '16'
-    SlaapkamerLinksWand = '18'
-    Oprit = '21'
-    TuinPin = '22'
-    TuinGrondspot = '23'
-    ZwembadLicht = '25'
-    ZwembadRolOpen = '26'
-    ZwembadRolToe = '28'
+class HomeRelays(Enum):
+    """Enum class with list of my relays."""
+    OVERLOOP_WAND = 1                # 2nd floor - Hall - Lights wall
+    OVERLOOP_BUREAU = 14             # 2nd floor - Hall - Light desk
+    MASTER_PLAFOND = 2               # 2nd floor - Master Bedroom - Light ceiling
+    MASTER_WAND = 19                 # 2nd floor - Master Bedroom - Lights wall
+    EETKAMER_PLAFOND = 3             # Groundfloor - Dining area - Lights Ceiling
+    KEUKEN_ONTBIJT = 4               # Groundfloor - Kitchen area - Lights Breakfast Table
+    KEUKEN_AANRECHT = 9              # Groundfloor - Kitchen area - Lights Sink
+    VOORDEUR_SPOTS = 5               # Groundfloor - Front door - Lights ceiling
+    VOORDEUR_WAND = 8                # Groundfloor - Front door - Light Wall
+    WC = 6                           # Groundfloor - Toilet - Light
+    SALON_WAND = 7                   # Groundfloor - Living area - Light Wall
+    SALON_SPOTS = 10                 # Groundfloor - Living area - Lights ceiling
+    ZIJDEUR_WAND = 11                # Groundfloor - Side door - Lights Wall
+    ZIJDEUR_PLAFOND = 20             # Groundfloor - Side door - Lights Ceiling
+    KELDER_PLAFOND = 12              # Basement - Basement - Lights Ceiling
+    BADKAMER_DOUCHE = 13             # 2nd floor - Bathroom - Lights Shower
+    BADKAMER_SPIEGEL = 24            # 2nd floor - Bathroom - Light Mirror
+    SLAAPKAMER_RECHTS_WAND = 15      # 2nd floor - Right Bedroom - Lights wall
+    SLAAPKAMER_RECHTS_PLAFOND = 17   # 2nd floor - Right Bedroom - Lights Ceiling
+    SLAAPKAMER_LINKS_PLAFOND = 16    # 2nd floor - Left Bedroom - Lights wall
+    SLAAPKAMER_LINKS_WAND = 18       # 2nd floor - Left Bedroom - Lights Ceiling
+    OPRIT = 21                       # Outside - Driveway - Lights
+    TUIN_PIN = 22                    # Outside - Garden - Pin Lights
+    TUIN_GROUND = 23                 # Outside - Garden - Ground Lights
+    ZWEMBAD_LICHT = 25               # Outside - Swimming Pool - Lights
+    ZWEMBAD_ROL_OPEN = 26            # Outside - Swimming Pool - Open Shutter
+    ZWEMBAD_ROL_TOE = 28             # Outside - Swimming Pool - Close Shutter
 
 async def main(ip_address, port):
     """Connect to KNX/IP bus, switch on light, wait 2 seconds and switch it off again."""
@@ -56,7 +57,7 @@ async def main(ip_address, port):
     # Light 1: A simple light without a dimmer, controlled via a relay
     lightObject1 = Light(doip,
                   name='OverloopBureau',  # Name of the light
-                  group_address_switch=HomeRelays.OverloopBureau,  # Address used for switching the light
+                  group_address_switch=HomeRelays.OVERLOOP_BUREAU,  # Address used for switching the light
                   doip_component="relay")  # This light uses a relay to switch on/off
     
     # Turn the light on, wait for 2 seconds then turn it off and wait for 2 seconds
@@ -76,7 +77,7 @@ async def main(ip_address, port):
     # Light 2: A dimmable light with a separate relay to turn on/off and control brightness
     lightObject2 = Light(doip,
                 name='OverloopWand',  # Name of the light
-                group_address_switch=HomeRelays.OverloopWand,  # Address for switching on/off
+                group_address_switch=HomeRelays.OVERLOOP_WAND,  # Address for switching on/off
                 group_address_brightness='1',  # Address for controlling brightness
                 doip_component="relay")  # This light also uses a relay
     
