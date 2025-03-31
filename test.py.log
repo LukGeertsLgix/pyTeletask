@@ -1,8 +1,0 @@
-2024-10-22 00:00:41,743 - teletask.log - INFO - Teletask instance created.
-2024-10-22 00:00:41,744 - teletask.log - DEBUG - Create an instance of the Client for managing connections
-2024-10-22 00:00:41,744 - teletask.log - DEBUG - Register a callback to handle responses received from the Client
-2024-10-22 00:00:41,744 - teletask.log - DEBUG - Trying to connect to 192.168.1.22:55957 
-2024-10-22 00:00:41,746 - teletask.log - INFO - Sending: s,3,11,16,
-2024-10-22 00:00:51,763 - teletask.log - INFO - Sending: s,3,11,16,
-2024-10-22 00:00:57,832 - teletask.log - DEBUG - Stopping TelegramQueue
-2024-10-22 00:00:57,832 - teletask.log - INFO - Closing transport None
