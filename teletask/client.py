@@ -129,7 +129,6 @@ class Teletask:
         await self.telegrams.put(telegram)
         await asyncio.sleep(1)
 
-
     def register_device(self, device):
         """Register a device to the Teletask module.
         

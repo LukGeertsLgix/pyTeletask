@@ -1,4 +1,4 @@
 """Module for Teletask Exception handling."""
-from .exception import TeletaskException, ConversionError, \
-    CouldNotParseTelegram, CouldNotParseTeletaskIP, CouldNotParseAddress, \
-    DeviceIllegalValue, CouldNotParseTeletaskCommand
+from .exception import TeletaskException, CouldNotParseTelegram, \
+    CouldNotParseTeletaskCommand, CouldNotParseTeletaskIP, ConversionError, \
+    CouldNotParseAddress, DeviceIllegalValue 
